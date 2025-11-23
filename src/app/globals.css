@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply dark;
+  }
+
+  body {
+    @apply bg-dark-bg text-dark-text;
+    @apply overflow-x-hidden;
+  }
+
+  /* Custom scrollbar for dark mode */
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-dark-bg;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-dark-border rounded-full;
+    @apply hover:bg-dark-muted;
+  }
+
+  /* Selection colors */
+  ::selection {
+    @apply bg-glow-cyan/30 text-dark-text;
+  }
+}
+
+@layer components {
+  /* Glow effects for special elements */
+  .glow-cyan {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+  }
+
+  .glow-gold {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+  }
+
+  /* Animated gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-glow-cyan via-glow-purple to-glow-gold;
+    @apply bg-clip-text text-transparent;
+    background-size: 200% auto;
+    animation: gradient-shift 3s ease infinite;
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  /* Gaming-style button */
+  .btn-gaming {
+    @apply relative overflow-hidden;
+    @apply bg-gradient-to-r from-glow-cyan to-glow-purple;
+    @apply text-white font-bold;
+    @apply transition-all duration-300;
+  }
+
+  .btn-gaming::before {
+    content: '';
+    @apply absolute inset-0;
+    @apply bg-gradient-to-r from-transparent via-white/20 to-transparent;
+    @apply translate-x-[-100%];
+    @apply transition-transform duration-500;
+  }
+
+  .btn-gaming:hover::before {
+    @apply translate-x-[100%];
+  }
+
+  /* Card hover effect */
+  .card-hover {
+    @apply transition-all duration-300;
+    @apply hover:scale-105 hover:shadow-2xl;
+  }
+
+  /* Tech panel effect */
+  .tech-panel {
+    @apply bg-dark-surface border-2 border-dark-border;
+    @apply backdrop-blur-sm;
+    @apply rounded-xl;
+  }
+
+  /* Pulse animation for active states */
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+@layer utilities {
+  /* Text utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Landscape optimization for tablets */
+  @media (orientation: landscape) and (min-width: 768px) {
+    .landscape-optimize {
+      @apply px-12 py-6;
+    }
+  }
+
+  /* Touch-friendly spacing */
+  .touch-spacing {
+    @apply p-4 md:p-6;
+  }
+
+  /* Smooth transitions */
+  .smooth-transition {
+    @apply transition-all duration-300 ease-in-out;
+  }
+}
+
+/* Animation keyframes */
+@keyframes slide-in-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-down {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsive font sizes for tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+/* Prevent text selection on UI elements */
+button, .no-select {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+/* Ensure full viewport height on mobile */
+.min-h-screen {
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+}
